@@ -46,7 +46,6 @@ sessionRouter.get('/githubSession', passport.authenticate('github'), async (req,
     }
     res.redirect('/')
 })
-
 sessionRouter.get('/logout', (req, res) => {
     req.session.destroy(function (e) {
         if (e) {
@@ -57,5 +56,10 @@ sessionRouter.get('/logout', (req, res) => {
 
     })
 })
+
+sessionRouter.get('/testJWT', passport.authenticate('jwt', { session: false }), (req, res) => {
+    res.status(200).send(req.user)
+})
+
 
 export default sessionRouter

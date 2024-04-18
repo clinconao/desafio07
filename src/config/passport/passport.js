@@ -5,11 +5,13 @@ import GithubStrategy from 'passport-github2'
 import { userModel } from '../../models/user.js'
 import { createHash, validatePassword } from '../../utils/bcrypt.js'
 
+import { strategyJWT } from './strategies/jwtStrategy.js'
 
 const localStrategy = local.Strategy
 
 const initializePassport = () => {
     
+
 
     passport.use('register', new localStrategy({ passReqToCallback: true, usernameField: 'email' }, async (req, username, password, done) => {
         try {
@@ -26,12 +28,12 @@ const initializePassport = () => {
         }
     }))
 
-    //Inicializar la sesion del usuario
+    //Inicializar la sesion
     passport.serializeUser((user, done) => {
         done(null, user._id)
     })
 
-    //Eliminar la sesion del usuario
+    //Eliminar la sesion
     passport.deserializeUser(async (id, done) => {
         const user = await userModel.findById(id)
         done(null, user)
@@ -49,11 +51,11 @@ const initializePassport = () => {
             return done(e)
         }
     }))
-
+    /*
     passport.use('github', new GithubStrategy({
         clientID: "",
         clientSecret: "",
-        callbackURL: ""
+        callbackURL: "http://localhost:8000/api/session/githubSession"
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             const user = await userModel.findOne({ email: profile._json.email }).lean()
@@ -70,9 +72,8 @@ const initializePassport = () => {
             return done(error)
         }
     }))
-
-
-
+    */
+    passport.use('jwt', strategyJWT)
 
 }
 export default initializePassport
