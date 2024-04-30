@@ -46,6 +46,11 @@ sessionRouter.get('/githubSession', passport.authenticate('github'), async (req,
     }
     res.redirect('/')
 })
+
+sessionRouter.get('/current', passport.authenticate('jwt'), (req, res) => {
+    console.log(req)
+    res.status(200).send("Usuario logueado")
+})
 sessionRouter.get('/logout', (req, res) => {
     req.session.destroy(function (e) {
         if (e) {

@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 
-export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(12))
+export const createHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(process.env.SALT))
 
 const passwordE = (createHash("pruebapassword"))
 console.log(passwordE)

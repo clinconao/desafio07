@@ -11,7 +11,7 @@ const cookieExtractor = req => {
 
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-    secretOrKey: "myXy6WqAvNAJy3Kb"
+    secretOrKey: process.env.JWT_SECRET
 }
 
 
