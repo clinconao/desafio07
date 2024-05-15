@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { userModel } from "../models/user.js";
 import { validatePassword, createHash } from "../utils/bcrypt.js";
-import passport from "passport";
+import passport from "passport"
 
 const sessionRouter = Router()
 
