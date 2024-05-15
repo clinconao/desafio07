@@ -1,5 +1,3 @@
-
-
 import express from "express"
 import mongoose from "mongoose"
 import messageModel from "./models/messages.js"
