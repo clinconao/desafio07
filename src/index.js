@@ -106,6 +106,9 @@ io.on('conection', (socket) => {
             io.emit('mensajeLogs', mensajes)
         } catch (error) {
             io.emit('mensajeLogs', error)
+            req.logger.error(`Metodo: ${req.method} en ruta ${req.url} - ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`)
+        res.status(500).send(e)
+            req.logger.error("ERROR")
         }
 
     })
