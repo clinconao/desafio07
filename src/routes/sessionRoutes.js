@@ -15,4 +15,6 @@ sessionRouter.get('/logout', logout)
 
 sessionRouter.get('/testJWT', passport.authenticate('jwt', { session: false }), testJWT)
 
+sessionRouter.get('/changePassword', passport.authenticate('jwt', { session: false }),)
+
 export default sessionRouter
