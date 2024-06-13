@@ -8,18 +8,21 @@ const transporter = nodemailer.createTransport({
     }
 })
 
-const sendEmailChangePassword = async (email) => {
+export const sendEmailChangePassword = async (email, linkChangePassword) => {
     const mailOption = {
         from: "claudiotestingcoder@gmail.com",
         to: email,
-        subject: "Recuperación de email",
-        text:
-        `
-        haz click en el siguiente enlance para cambiar tu password: ${linkChangePassword}
-        `,
+        subject: "Recuperación de password",
         html:
         `
-        <p>Haz click aquí para cambiar tu constraseña: <p> <a href=${linkChangePassword}>Cambiar contraseña</a>
+        <p>Haz click aquí para cambiar tu constraseña: </p><button> <a href=${linkChangePassword}>Cambiar contraseña</a></button>
         `
     }
+    transporter.sendMail(mailOption, (error, info)=>{
+        if (error) {
+            console.log("Error al enviar correo de cambio de contraseña")
+        } else {
+            console.log("Correo enviado correctamente", info.response)
+        }
+    })
 }
