@@ -4,7 +4,7 @@ import Assert from 'assert'
 
 const assert = Assert.strict
 
-await mongoose.connect(`mongodb+srv://cllinconao:myXy6WqAvNAJy3Kb@cluster0.od9skcq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+await mongoose.connect(`mongodb+srv://cllinconao:@cluster0.od9skcq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
 
 describe('Test CRUD de usuarios en la ruta /api/users', function () {
 
