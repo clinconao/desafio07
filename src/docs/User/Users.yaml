@@ -1,0 +1,171 @@
+paths:
+  /api/users/:
+    get:
+        summary: Obtener todos usuarios
+        tags: 
+          - Users
+    post:
+    summary: Crear un nuevo usuario
+    tags: 
+      - Users
+    parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          type: object
+          properties:
+            first_name:
+              type: string
+
+            last_name:
+              type: string
+
+            email:
+              type: string
+
+            password:
+              type: string
+    responses:
+    '201':
+      description: Usuario creado correctamente
+      content: 
+        application/json:
+          schema:
+            items:
+              $ref: '#/components/schemas/User'
+      '500':
+        description: Error al crear cliente
+  /api/users/{id}:
+get: 
+    summary: Obtener un usuario
+    tags: 
+      - Users
+      parameters:
+      - name : id
+        in: path
+        requerid: true
+        schema:
+          $type: String
+          description: Id del usuario a buscar
+      responses:
+      '200': 
+        description: Usuario obtenido correctamente
+        content: 
+          application/json: 
+            schema:
+              items:
+                $ref: '#/components/schemas/User'
+      '404':
+        description: Usuario no existe
+      '500':
+        description: Error al obtener usuario
+    responses: 
+    '200': 
+      description: usuarios obtenidos correctamente
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                $ref: '#/components/schemas/User'
+    
+    '500':
+    description: Error al obtener usuarios
+put:
+    summary: Actualizar un usuario
+    tags: 
+      - Users
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        $type: String
+      description: Id del usuario al actualizar
+    - name: body
+      in: body
+      required: true
+      schema:
+        type: object
+        properties:
+          first_name:
+            type: String
+          last_name:
+            type: String
+
+          email:
+            type: String
+
+          password:
+            type: String
+    responses: 
+      '200':
+        description: "Usuario actualizado correctamente"
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/User '
+      
+      '404':
+        description: Usuario no encontrado
+      '500':
+        description: Error al actualizar usuario
+
+delete:
+    summary: Eliminar un usuario
+    tags: 
+      - Users
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $type: String
+        description: Id del usuario al eliminar
+    responses:
+
+      '200':
+        description: "Usuario eliminado correctamente"
+        content:
+          application/json: 
+          schema:
+            items:
+              $ref: '#/components/schemas/User '
+      '404':
+        description: Usuario no encontrado
+      '500':
+        description: Error al eliminar usuario
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+            description: Id autogenerado por MongoDB
+        first_name:
+          type: String
+            description: Nombre de usuario     
+        last_name:
+          type: String 
+            description: Apellido de usuario  
+        email:
+          type: String
+            description: email de usuario
+        password:
+          type: String
+            description: password del usuario
+
+        rol:
+          type: Object
+            description: rol del usuario
+
+    example:
+    _id: ObjectId('ksjdxhjes')
+    first_name: Peter
+    last_name: Elguat
+    email: peter@petro.cl
+    password: jskehfjdwndje
