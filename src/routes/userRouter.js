@@ -5,4 +5,6 @@ const userRouter = Router()
 
 userRouter.get('/', getUsers)
 
+userRouter.post('/:uid/documents')
+
 export default userRouter
