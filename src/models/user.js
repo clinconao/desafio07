@@ -28,6 +28,14 @@ const userSchema = new Schema({
     rol: {
         type: String,
         default: "User"
+    },
+    documents: {
+        type: Object,
+        default: []
+    },
+    last_connection: {
+        type: Date
+
     }
 })
 
