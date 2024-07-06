@@ -37,10 +37,11 @@ export const register = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
-    console.log(req.session)
-    const user = await userModel.findById(req.session.user._id)
+
+    const user = await userModel.findOne({email: req.session.user.email})
     user.last_connection = new Date()
-    await user.save
+    await user.save()
+
     req.session.destroy(function (e) {
         if (e) {
             console.log(e)
